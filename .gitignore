@@ -1,0 +1,28 @@
+# Sensitive files - DO NOT COMMIT
+config.php
+*.log
+error_log
+
+# Environment files
+.env
+.env.*
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Node modules
+node_modules/
+
+# Moodle data
+moodledata/
+
+# Cache and temp files
+/vendor/
+*.cache
