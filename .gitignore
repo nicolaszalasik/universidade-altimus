@@ -1,28 +1,23 @@
-# Sensitive files - DO NOT COMMIT
+# Ignorar todo o core do Moodle - rastrear apenas customizações
+/*
+
+# Customizações a rastrear
+!auth/
+!theme/
+!repository-altimus/
+!.gitignore
+
+# Dentro de auth, ignorar tudo exceto altimus
+auth/*
+!auth/altimus/
+
+# Dentro de theme, ignorar tudo exceto moove
+theme/*
+!theme/moove/
+
+# Arquivos sensíveis
 config.php
 *.log
 error_log
-
-# Environment files
-.env
-.env.*
-
-# IDE
-.idea/
-.vscode/
-*.swp
-*.swo
-
-# OS files
 .DS_Store
-Thumbs.db
-
-# Node modules
 node_modules/
-
-# Moodle data
-moodledata/
-
-# Cache and temp files
-/vendor/
-*.cache

@@ -1,43 +1,31 @@
-body#page-enrol-index {
-    #region-main .generalbox.info .card-footer{
-        display: none;
+#page-enrol-index #region-main {
+    .generalbox:first-of-type {
+        width: 33.33%;
+        float: left;
+    }
+
+    .generalbox:not(:first-of-type) {
+        float: right;
+        width: calc(66.66% - 1rem);
+        padding: 1rem;
+        margin-top: 1rem;
+        margin-left: 1rem;
+        border-radius: .5rem;
+        -webkit-box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
+        box-shadow: 0 0 35px 0 rgba(154,161,171,.15);
     }
 }
 
 @include media-breakpoint-down(md) {
-    body#page-enrol-index {
-        #page-header {
-            display: none;
+    #page-enrol-index #region-main {
+        .generalbox {
+            width: 100% !important;
+            float: none !important;
+            margin: .5rem 0 .5rem 0 !important;
         }
 
-        #page-content {
-            padding-top: 1rem;
-        }
-
-        #region-main {
-            .generalbox {
-                display: block;
-                width: 100%;
-
-                &:last-of-type {
-                    width: 100%;
-                    padding: 0;
-                }
-
-                #fitem_id_submitbutton {
-                    margin-left: 1.5rem;
-
-                    .form-inline {
-                        padding: 0;
-                    }
-                }
-
-                &:not(.info) {
-                    margin: .5rem 0;
-                    padding: 0 1rem;
-                    background-color: #eef5f9;
-                }
-            }
+        .generalbox:first-of-type {
+            padding: 0 !important;
         }
     }
 }

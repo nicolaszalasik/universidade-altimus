@@ -15,7 +15,7 @@
     along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 }}
 {{!
-    @template core/full_header
+    @template theme_moove/full_header
 
     This template renders the header.
 
@@ -25,45 +25,97 @@
         "settingsmenu": "settings_html",
         "hasnavbar": false,
         "navbar": "navbar_if_available",
-        "courseheader": "course_header_html"
+        "courseheader": "course_header_html",
+        "welcomemessage": "welcomemessage"
     }
 }}
-<header id="page-header" class="row">
-    <div class="col-12 pt-3 pb-3">
-        <div class="card {{^contextheader}}border-0 bg-transparent{{/contextheader}}">
-            <div class="card-body {{^contextheader}}p-2{{/contextheader}}">
-                <div class="d-flex align-items-center">
-                    {{#contextheader}}
-                    <div class="mr-auto">
-                        {{{contextheader}}}
-                    </div>
-                    {{/contextheader}}
-
-                    {{#settingsmenu}}
-                    <div class="context-header-settings-menu">
-                        {{{settingsmenu}}}
-                    </div>
-                    {{/settingsmenu}}
-                    <div class="header-actions-container flex-shrink-0" data-region="header-actions-container">
-                        {{#headeractions}}
-                            <div class="header-action ml-2">{{{.}}}</div>
-                        {{/headeractions}}
-                    </div>
-                </div>
-                <div class="d-flex flex-wrap">
-                    {{#hasnavbar}}
-                    <div id="page-navbar">
-                        {{{navbar}}}
-                    </div>
-                    {{/hasnavbar}}
-                    <div class="ml-auto d-flex">
-                        {{{pageheadingbutton}}}
-                    </div>
-                    <div id="course-header">
-                        {{{courseheader}}}
-                    </div>
-                </div>
-            </div>
+<header id="page-header" class="moove-container-fluid">
+    <div class="d-flex flex-wrap">
+        <div class="ml-auto d-flex">
+            {{{pageheadingbutton}}}
         </div>
+        <div id="course-header">
+            {{{courseheader}}}
+        </div>
+    </div>
+    <div class="altimuss card card-body shadow" style="">
+    <table style="width: 100%;">
+        <thead>
+            <tr style="display: flex; align-items: center;">
+                <th scope="col" style="width: 60%;">
+                    <h2 style="color: #007bff;"> Bem Vindo a Universidade Altimus!</h2>
+                    <p style="margin-right: 20px; margin-botton: 10px; color: #80868b; font-weight: 400;">A Universidade Altimus foi criada para auxiliar você na busca por informações, resoluções de dúvidas sobre o produto, ajudar a configurar recursos quando necessário e trazer conhecimentos relevantes sobre o sistema.</p>
+                </th>
+                <th class="btnd" scope="col">
+                    <a class="linhaoff" href="https://altimus.movidesk.com/kb" target="_blank">
+                        <button class="card card-body shadow shadowartigos" title="Artigos">
+                        <br><i class="fa fa-comment" style="font-size: 25px; color: #007bff;"></i> 
+                        <p>Artigos<br>Altimus</p>
+                        </button>
+                    </a>
+                    <a class="linhaoff" href="http://localhost/moodle/" target="_blank">
+                        <button class="card card-body shadow shadowartigos" style="text-align: center !important; margin-right: 20px !important;" title="Cursos">
+                        <br><i class="fa-solid fa-book-open-reader" style="font-size: 25px; color: #007bff;"></i> 
+                        <p>Veja todos<br>os cursos</p>
+                        </button>
+                    </a>
+                    <a class="linhaoff" href="http://localhost/moodle/my/courses.php" target="_blank">
+                        <button class="card card-body shadow shadowartigos" style="text-align: center !important; margin-right: 20px !important;" title="Cursos">
+                        <br><i class="fa-solid fa-pencil" style="font-size: 25px; color: #007bff;"></i> 
+                        <p>Meus<br>cursos</p>
+                        </button>
+                    </a>
+                </th>
+            </tr>
+            <!-- Chat Movidesk -->
+            <script type="text/javascript">var mdChatClient="F5788E56ED3D44BBBE4E6C2558DBF01B";</script>
+            <script src="https://chat.movidesk.com/Scripts/chat-widget.min.js"></script>
+            <!-- Chat do Movidesk fim -->
+        </thead>
+        <tbody>
+            <button onclick="topFunction()" id="myBtn" title="Voltar ao topo"><i class="fa-solid fa-angles-up"></i></button>
+
+    <script>
+        // Mostra o botão de voltar ao topo quando o usuário rolar a página para baixo
+        window.onscroll = function() {scrollFunction()};
+
+        function scrollFunction() {
+          if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+            document.getElementById("myBtn").style.display = "block";
+          } else {
+            document.getElementById("myBtn").style.display = "none";
+          }
+        }
+
+        // Quando o botão é clicado, rola suavemente para o topo da página
+        function topFunction() {
+          const scrollStep = -window.scrollY / (500 / 15); // 500 é a duração da animação em milissegundos, 15 é a quantidade de passos por milissegundo
+          const scrollInterval = setInterval(function(){
+            if ( window.scrollY != 0 ) {
+              window.scrollBy( 0, scrollStep );
+            }
+            else clearInterval(scrollInterval);
+          },15);
+        }
+    </script>
+        </tbody>
+    </table>
+    <br>
+    <p></p>
+    </div>
+    <div class="d-sm-flex align-items-center">    
+        
+        {{> core/welcome }}
+        <div class="header-actions-container ml-auto" data-region="header-actions-container">
+            {{#headeractions}}
+                <div class="header-action ml-2">{{{.}}}</div>
+            {{/headeractions}}
+        </div>
+
+        {{#hasnavbar}}
+            <div class="d-none d-md-block" id="page-navbar">
+                {{{navbar}}}
+            </div>
+        {{/hasnavbar}}
     </div>
 </header>

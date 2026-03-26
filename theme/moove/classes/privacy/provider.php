@@ -15,26 +15,25 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Overriden course topics format renderer.
+ * Privacy provider
  *
  * @package    theme_moove
- * @copyright  2018 Willian Mano - http://conecti.me
+ * @copyright  2022 Willian Mano {@link https://conecti.me}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 namespace theme_moove\privacy;
 
-use \core_privacy\local\metadata\collection;
-use \core_privacy\local\metadata\provider as baseprovider;
-use \core_privacy\local\request\user_preference_provider;
-use \core_privacy\local\request\writer;
-
-defined('MOODLE_INTERNAL') || die();
+use core_privacy\local\metadata\collection;
+use core_privacy\local\metadata\provider as baseprovider;
+use core_privacy\local\request\user_preference_provider;
+use core_privacy\local\request\writer;
 
 /**
- * The moove theme does not store any data.
+ * Privacy provider class
  *
- * @copyright  2018 Willian Mano - http://conecti.me
+ * @package    theme_moove
+ * @copyright  2022 Willian Mano {@link https://conecti.me}
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 class provider implements
