@@ -7,13 +7,8 @@ class Authentication
     {
         $curl = curl_init();
 
-        $arrAuth = array(
-            'email' => $user,
-            'senha' => $pass
-        );
-
         curl_setopt_array($curl, array(
-            CURLOPT_URL => Constants::getApiUrl() . '/api/login/universidade',
+            CURLOPT_URL => Constants::getUrlBase() . '/api/login/universidade',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -21,10 +16,8 @@ class Authentication
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_2,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode($arrAuth),
-            CURLOPT_HTTPHEADER => array(
-                'Content-Type: application/json'
-            )
+            CURLOPT_POSTFIELDS => json_encode(['email' => $user, 'senha' => $pass]),
+            CURLOPT_HTTPHEADER => ['Content-Type: application/json'],
         ));
 
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
@@ -51,19 +44,12 @@ class Authentication
         return $retorno->info;
     }
 
-
     public function validateToken($email, $token)
     {
         $curl = curl_init();
 
-        $header = [
-            'Authorization: Bearer ' . $token,
-            'Content-Type: application/json'
-        ];
-        $arrField['email'] = $email;
-
         curl_setopt_array($curl, array(
-            CURLOPT_URL => Constants::getApiUrl() . '/api/login/universidade/valida-token',
+            CURLOPT_URL => Constants::getUrlBase() . '/api/login/universidade/valida-token',
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_ENCODING => '',
             CURLOPT_MAXREDIRS => 10,
@@ -71,8 +57,11 @@ class Authentication
             CURLOPT_FOLLOWLOCATION => true,
             CURLOPT_HTTP_VERSION => CURL_HTTP_VERSION_1_1,
             CURLOPT_CUSTOMREQUEST => 'POST',
-            CURLOPT_POSTFIELDS => json_encode($arrField),
-            CURLOPT_HTTPHEADER => $header,
+            CURLOPT_POSTFIELDS => json_encode(['email' => $email]),
+            CURLOPT_HTTPHEADER => [
+                'Authorization: Bearer ' . $token,
+                'Content-Type: application/json',
+            ],
         ));
 
         curl_setopt($curl, CURLOPT_SSL_VERIFYHOST, 0);
@@ -83,6 +72,7 @@ class Authentication
         curl_close($curl);
 
         if ($httpcode != 200) {
+            error_log('[Authentication] validateToken httpcode=' . $httpcode . ' response=' . $response);
             throw new Exception('Não foi possível autenticar o usuário');
         }
 

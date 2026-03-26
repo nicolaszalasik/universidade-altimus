@@ -2,14 +2,25 @@
 
 class Constants
 {
-    const URL_BASE_PROD  = 'https://api.altimus.com.br';
-    const URL_BASE_LOCAL = 'http://localhost:8000';
-    const SENHA_PADRAO   = 'aCY$so3v05i8';
+    public static function getUrlBase(): string {
+        $url = getenv('ALTIMUS_URL_BASE');
+        error_log('[Constants] ALTIMUS_URL_BASE = ' . ($url ?: 'NAO DEFINIDA'));
+        if (!$url) {
+            throw new Exception('Variável de ambiente ALTIMUS_URL_BASE não definida');
+        }
+        return $url;
+    }
 
-    public static function getApiUrl(): string
+    public static function getSenhaPadrao(): string {
+        $senha = getenv('ALTIMUS_SENHA_PADRAO');
+        if (!$senha) {
+            throw new Exception('Variável de ambiente ALTIMUS_SENHA_PADRAO não definida');
+        }
+        return $senha;
+    }
+
+    public function __construct()
     {
-        global $CFG;
-        $isLocal = isset($CFG->wwwroot) && strpos($CFG->wwwroot, 'localhost') !== false;
-        return $isLocal ? self::URL_BASE_LOCAL : self::URL_BASE_PROD;
+
     }
 }
